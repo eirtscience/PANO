@@ -69,6 +69,14 @@ pip install -r requirements.txt
 # updating g4f
 pip install -U g4f
 
+#Check if the the libwebp library exist
+find / -name "libwebp.so" 2>/dev/null | while read -r LIB_PATH; do
+    DIR_PATH=$(dirname "$LIB_PATH")
+    LINK_PATH="$DIR_PATH/libwebp.so.6"
+
+    [ -e "$LINK_PATH" ] || sudo ln -s "$LIB_PATH" "$LINK_PATH"
+done
+
 # Start PANO
 echo "Starting PANO..."
 python3 pano.py 
